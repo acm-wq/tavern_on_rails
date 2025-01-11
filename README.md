@@ -1,24 +1,56 @@
-# README
+# Hey! What's this?
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Tavern on the Rails is my personal non-profit project, created for fun and learning new technologies. Here you will find an example of working with Ruby on Rails, PostgreSQL, JavaScript and other tools. 
+The project is great for:
+- Learning other people's code and best practices.
+- Practices working with modern web technologies.
+- Experiments and improvements - feel free to fork and offer your ideas!
 
-Things you may want to cover:
+Contributions are welcome! 😊
 
-* Ruby version
+## Requirements
 
-* System dependencies
+```bash
+ruby ~> 3.3.6
+nodejs ~> 23.5.0
+postgres ~> 16.6
+```
 
-* Configuration
+## Getting Started
 
-* Database creation
+Check to see if it's running postgresql
 
-* Database initialization
+```bash
+systemctl status postgresql
+```
 
-* How to run the test suite
+Clone the project
 
-* Services (job queues, cache servers, search engines, etc.)
+```bash
+git clone https://github.com/acm-wq/tavern_on_rails
+cd tavern_on_rails
+```
 
-* Deployment instructions
+Install dependencies and apply migrations
 
-* ...
+```bash
+bundle install
+
+rails db:create db:migrate
+```
+
+Start server 
+
+```bash
+bin/dev
+```
+
+The server will be available at: http://localhost:3000
+
+## How can I help?
+
+- 🐞 Report bugs to Issues.
+
+- 💡 Suggest new features or improvements.
+
+- ✨ Make pull requests with fixes or new features.
