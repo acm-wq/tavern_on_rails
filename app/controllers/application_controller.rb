@@ -9,5 +9,11 @@ class ApplicationController < ActionController::Base
     current_user.present?
   end
 
+  def authenticate_user!
+    unless user_sign_in?
+      redirect_to register_path, alert: "Please log in to access this page."
+    end
+  end
+
   helper_method :current_user, :user_sign_in?
 end
