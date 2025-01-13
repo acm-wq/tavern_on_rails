@@ -4,10 +4,11 @@ class SessionsController < ApplicationController
 
   def create
     user = User.find_by(email: session_params[:email])
-    if user&.authenticate(session_params[:password])
+    if user && user.authenticate(session_params[:password])
       session[:user_id] = user.id
-      redirect_to root_path
+      redirect_to rooms_path
     else
+      flash.now[:alert] = "Invalid email or password"
       render :new
     end
   end
