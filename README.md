@@ -57,8 +57,10 @@ The server will be available at: http://localhost:3000
 
 ## Todo
 
+- [~] Add admin_panel
 - [ ] Add photos to the rooms
 - [ ] Add a rating for the rooms
-- [ ] Add a top and bottom panel to the site
 - [ ] Add a personal user account with a photo
 - [ ] Improve room retrieval requests and add pagination
+
+- [X] Add a top and bottom panel to the site
