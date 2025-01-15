@@ -1,11 +1,12 @@
 <h1 class="text-2xl font-bold mb-4">Rooms</h1>
 <button onclick="openModal()" class="inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 mb-4">Add New Room</button>
+<!-- Modal for Adding a New Room -->
 <div id="modal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden">
   <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
     <div class="mt-3 text-center">
       <h3 class="text-lg leading-6 font-medium text-gray-900">Add New Room</h3>
       <div class="mt-2 px-7 py-3">
-        <%= form_with model: @room, url: admin_rooms_path, local: false, id: "new_room_form" do |form| %>
+        <%= form_with model: @room, url: admin_rooms_path, local: false, id: "new_room_form", multipart: true do |form| %>
           <div class="mb-4">
             <%= form.label :name, class: "block text-gray-700 text-sm font-bold mb-2" %>
             <%= form.text_field :name, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
@@ -22,6 +23,10 @@
             <%= form.label :price, class: "block text-gray-700 text-sm font-bold mb-2" %>
             <%= form.number_field :price, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
           </div>
+          <div class="mb-4">
+            <%= form.label :photo, class: "block text-gray-700 text-sm font-bold mb-2" %>
+            <%= form.file_field :photo, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+          </div>
           <div class="flex items-center justify-between">
             <%= form.submit "Create Room", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" %>
             <button type="button" onclick="closeModal()" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Cancel</button>
@@ -31,6 +36,21 @@
     </div>
   </div>
 </div>
+<!-- Modal for Displaying Room Photo -->
+<div id="photoModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden">
+  <div class="relative top-20 mx-auto p-5 border w-1/2 shadow-lg rounded-md bg-white" onclick="event.stopPropagation()">
+    <div class="mt-3 text-center">
+      <h3 class="text-lg leading-6 font-medium text-gray-900">Room Photo</h3>
+      <div class="mt-2 px-7 py-3">
+        <img id="modalPhoto" src="" alt="Room Photo" class="w-full h-auto rounded-lg" />
+      </div>
+      <div class="flex items-center justify-center mt-4">
+        <button type="button" onclick="closePhotoModal()" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Table for Rooms -->
 <div class="overflow-x-auto">
   <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
     <thead class="bg-gray-100">
@@ -40,6 +60,7 @@
         <th class="py-3 px-4 border-b text-left">Capacity</th>
         <th class="py-3 px-4 border-b text-left">Price</th>
         <th class="py-3 px-4 border-b text-left">Date</th>
+        <th class="py-3 px-4 border-b text-left">Photo</th>
       </tr>
     </thead>
     <tbody>
@@ -51,6 +72,15 @@
           <td class="py-3 px-4 border-b"><%= number_to_currency(room.price, unit: "$") %></td>
           <td class="py-3 px-4 border-b">
             <%= Time.at(room.unix_time).strftime("%Y-%m-%d") %>
+          </td>
+          <td class="py-3 px-4 border-b">
+            <% if room.photo.attached? %>
+              <button onclick="showPhoto('<%= url_for(room.photo) %>')" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                Show Photo
+              </button>
+            <% else %>
+              No Photo
+            <% end %>
           </td>
         </tr>
       <% end %>
@@ -65,4 +95,19 @@
   function closeModal() {
     document.getElementById('modal').classList.add('hidden');
   }
+
+  function showPhoto(photoUrl) {
+    document.getElementById('modalPhoto').src = photoUrl;
+    document.getElementById('photoModal').classList.remove('hidden');
+  }
+
+  function closePhotoModal() {
+    document.getElementById('photoModal').classList.add('hidden');
+  }
+
+  document.getElementById('photoModal').addEventListener('click', function(event) {
+    if (event.target === this) {
+      closePhotoModal();
+    }
+  });
 </script>

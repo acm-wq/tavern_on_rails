@@ -7,7 +7,11 @@
       <% @rooms.each_with_index do |room, index| %>
         <div class="flex flex-col gap-4 rounded-lg shadow-lg bg-white dark:bg-[#262525]">
           <!-- Card Image -->
-          <img class="w-[16rem] h-[12rem] sm:w-[18rem] sm:h-[14rem] object-center aspect-square rounded-t-lg" src="https://techakim.com/sam/tg/7268/li/imgs/pizza.jpg" alt="Card Image" />
+          <% if room.photo.attached? %>
+            <%= image_tag room.photo, class: "w-[16rem] h-[12rem] sm:w-[18rem] sm:h-[14rem] object-cover rounded-t-lg", alt: "Room Photo" %>
+          <% else %>
+            <img class="w-[16rem] h-[12rem] sm:w-[18rem] sm:h-[14rem] object-cover rounded-t-lg" src="https://techakim.com/sam/tg/7268/li/imgs/pizza.jpg" alt="Default Room Photo" />
+          <% end %>
           <div class="flex flex-col">
             <!--  -->
             <div class="flex items-center justify-between my-4">

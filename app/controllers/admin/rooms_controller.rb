@@ -22,7 +22,7 @@ class Admin::RoomsController < ApplicationController
   private
 
   def room_params
-    params.require(:room).permit(:name, :description, :capacity, :price, :unix_time)
+    params.require(:room).permit(:name, :description, :capacity, :price, :photo)
   end
 
   def authenticate_admin!
