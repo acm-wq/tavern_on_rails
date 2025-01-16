@@ -1,5 +1,5 @@
 class Admin::RoomsController < ApplicationController
-  before_action :authenticate_admin!
+  include Authenticable
 
   def index
     @rooms = Room.all
@@ -23,11 +23,5 @@ class Admin::RoomsController < ApplicationController
 
   def room_params
     params.require(:room).permit(:name, :description, :capacity, :price, :photo)
-  end
-
-  def authenticate_admin!
-    unless current_user && current_user.user_roles.exists?(name: "admin")
-      redirect_to root_path, alert: "You do not have access to this page."
-    end
   end
 end

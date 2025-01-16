@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get 'admin/dashboard', to: 'admin#dashboard', as: 'admin_dashboard'
   namespace :admin do
     resources :rooms, only: [:new, :create, :index]
+    resources :users
   end
 
   get 'register', to: 'users#new', as: 'register'
