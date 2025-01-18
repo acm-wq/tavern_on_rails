@@ -61,6 +61,7 @@ The server will be available at: http://localhost:3000
 - [ ] Add a personal user account with a photo
 - [ ] Improve room retrieval requests and add pagination
 
+- [X] Add list users in admin_panel
 - [X] Add photos to the rooms
 - [X] Add admin_panel
 - [X] Add a top and bottom panel to the site
