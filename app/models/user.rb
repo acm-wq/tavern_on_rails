@@ -6,7 +6,7 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password, presence: true, length: { minimum: 6 }
 
-  has_many :assignments, foreign_key: "users_id"
+  has_many :assignments, foreign_key: "users_id", dependent: :nullify
   has_many :user_roles, through: :assignments
 
   include SetUnixTime

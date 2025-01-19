@@ -13,7 +13,7 @@ Contributions are welcome! 😊
 ```bash
 ruby ~> 3.3.6
 nodejs ~> 23.5.0
-postgres ~> 16.6
+postgres ~> 17.2
 ```
 
 ## Getting Started
@@ -58,9 +58,9 @@ The server will be available at: http://localhost:3000
 ## Todo
 
 - [ ] Add a rating for the rooms
-- [ ] Add a personal user account with a photo
 - [ ] Improve room retrieval requests and add pagination
 
+- [X] Add a personal user account with a photo
 - [X] Add list users in admin_panel
 - [X] Add photos to the rooms
 - [X] Add admin_panel

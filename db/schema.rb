@@ -43,8 +43,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_12_140040) do
   end
 
   create_table "assignments", force: :cascade do |t|
-    t.bigint "users_id", null: false
-    t.bigint "user_roles_id", null: false
+    t.bigint "users_id"
+    t.bigint "user_roles_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_roles_id"], name: "index_assignments_on_user_roles_id"
@@ -80,6 +80,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_12_140040) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "assignments", "user_roles", column: "user_roles_id"
-  add_foreign_key "assignments", "users", column: "users_id"
+  add_foreign_key "assignments", "user_roles", column: "user_roles_id", on_delete: :nullify
+  add_foreign_key "assignments", "users", column: "users_id", on_delete: :nullify
 end
